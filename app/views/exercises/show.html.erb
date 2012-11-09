@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @exercise.title %>
+</p>
+<%= link_to 'Edit', edit_exercise_path(@exercise) %> |
+<%= link_to 'Back', exercises_path %>
+<br>
+<!-- <p>
+  <b>Description:</b>
+  <%= @exercise.description %>
+</p>
+
+<p>
+  <b>Moves:</b>
+  <%= @exercise.moves %>
+</p>
+ -->
+<button id="move">Next Move</button>
+<br>
+<button id="showCoordinates">Coordinates</button>
+
+<%= render 'board' %>
+
+
