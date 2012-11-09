@@ -4,7 +4,7 @@ class CreateExercises < ActiveRecord::Migration
       t.string :title
       t.text :description
       t.text :moves
-      t.string :start
+      t.text :start
 
       t.timestamps
     end
