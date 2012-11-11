@@ -1,33 +1,32 @@
-<%= form_for(@exercise) do |f| %>
-  <% if @exercise.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@exercise.errors.count, "error") %> prohibited this exercise from being saved:</h2>
-
-      <ul>
-      <% @exercise.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @exercise, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'text_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :class => 'text_area' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :moves, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :moves, :class => 'text_area' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :start, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :start, :class => 'text_area' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :moves %><br />
-    <%= f.text_area :moves %>
-  </div>
-  <div class="field">
-    <%= f.label :start %><br />
-    <%= f.text_area :start %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                exercises_path, :class => 'btn' %>
   </div>
 <% end %>
