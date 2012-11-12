@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  piece: MyString
+  starting_coordinate: MyString
+  ending_coordinate: MyString
+  explaination: MyText
+
+two:
+  piece: MyString
+  starting_coordinate: MyString
+  ending_coordinate: MyString
+  explaination: MyText
