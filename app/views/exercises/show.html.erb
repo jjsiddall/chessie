@@ -1,20 +1,38 @@
-<%- model_class = Exercise -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+<div class="row">
+  <div class="span12">
+      <%- model_class = Exercise -%>
+      <div class="page-header">
+        <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+      </div>
+  </div>
 </div>
+<div class="row">
+  <div class="span4">
+    <dl class="dl-horizontal">
+      <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
+      <dd><%= @exercise.title %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+      <dd><%= @exercise.description %></dd>
+    </dl>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @exercise.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @exercise.description %></dd>
-</dl>
-<%= render 'board' %>
-<div class="form-actions">
-  <button id="move" class='btn btn-primary'>Next Move</button>
-  <button id="showCoordinates" class='btn btn-warning'>Coordinates</button>
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              exercises_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_exercise_path(@exercise), :class => 'btn' %>
+    <ul>
+      <% @exercise.moves.each do |move| %>
+        <li><%= move.move_number %>: <%= move.piece %> from <%= move.starting_coordinate %> to <%= move.ending_coordinate %></li>
+      <% end %>
+    </ul>
+
+  </div>
+  <div class="span8">
+
+    <%= render 'board' %>
+
+    <div class="form-actions">
+      <button id="move" class='btn btn-primary'>Next Move</button>
+      <button id="showCoordinates" class='btn btn-warning'>Coordinates</button>
+      <%= link_to t('.back', :default => t("helpers.links.back")),
+                  exercises_path, :class => 'btn'  %>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  edit_exercise_path(@exercise), :class => 'btn' %>
+    </div>
+  </div>
 </div>

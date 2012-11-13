@@ -8,9 +8,9 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:moves) %></th>
+      <th style="width: 15%"><%= model_class.human_attribute_name(:moves) %></th>
       <th><%= model_class.human_attribute_name(:start) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:updated_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -20,9 +20,15 @@
         <td><%= link_to exercise.id, exercise_path(exercise) %></td>
         <td><%= exercise.title %></td>
         <td><%= exercise.description %></td>
-        <td><%= exercise.moves %></td>
+        <td>
+          <ul>
+            <% exercise.moves.each do |actor| %>
+            <li><%= actor.move_number %>: <%= actor.piece %> from <%= actor.starting_coordinate %> to <%= actor.ending_coordinate %></li>
+            <% end %>
+          </ul>
+        </td>
         <td><%= exercise.start %></td>
-        <td><%=l exercise.created_at %></td>
+        <td><%=time_ago_in_words(l exercise.updated_at) %> ago</td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_exercise_path(exercise), :class => 'btn btn-mini' %>
