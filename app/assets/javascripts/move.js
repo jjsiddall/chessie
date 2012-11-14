@@ -1,27 +1,37 @@
 $(document).ready(function() {
 	
-	var moves = $("#board").data('moves').split(",")
+	// var moves = $("#board").data('moves').split(",")
 
 	$('#move').on('click', function() {
 
-		if (moves.length !=0) {
-			one_move(moves[0]);
-			moves.shift();
-		}
+		// if (moves.length !=0) {
+		// 	one_move(moves[0]);
+		// 	moves.shift();
+		// }
 
+		$('.nextMove:first').removeClass("hideMe");
+		var shown_move = $('.nextMove:first').html().split(" ");
+		$('.nextMove:first').removeClass("nextMove");
+
+		var current_move = [shown_move[2]];
+		current_move.push(shown_move[4]);
+
+		one_move(current_move, shown_move[0]);
 	});
 
 	$('#showCoordinates').on('click', function() { $('.coordinate').toggleClass("hideMe");});
 
 });
 
-function one_move(move){
-	//Look at current from and to move, then find the change in squares
-	var current_move = move.split("-");
+function one_move(current_move, piece){
+	// //Look at current from and to move, then find the change in squares
+	// var current_move = move.split("-");
 
-	//remove anything but the last two letters from the moves
-	current_move[0] = current_move[0].substr(-2);
-	current_move[1] = current_move[1].substr(-2);
+	// //remove anything but the last two letters from the moves
+	// current_move[0] = current_move[0].substr(-2);
+	// current_move[1] = current_move[1].substr(-2);
+
+console.log(current_move);
 
 	var rank_change = find_change_in_rank(current_move);
 	var file_change = find_change_in_file(current_move);
@@ -30,7 +40,7 @@ function one_move(move){
 	console.log("File: "+file_change)	
 	
 	//need to determine if its a knight move or a bishop/queen/king
-	if ((rank_change != 0) && (file_change != 0) && (move.search("N") === -1))
+	if ((rank_change != 0) && (file_change != 0) && (piece != "♞"))
 	{
 		move_diagonal(current_move[0], current_move[1], rank_change, file_change)
 	}

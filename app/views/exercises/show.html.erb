@@ -15,24 +15,24 @@
       <dd><%= @exercise.description %></dd>
     </dl>
 
-    <ul>
-      <% @exercise.moves.each do |move| %>
-        <li><%= move.move_number %>: <%= move.piece %> from <%= move.starting_coordinate %> to <%= move.ending_coordinate %></li>
-      <% end %>
-    </ul>
+    <% @exercise.moves.each do |move| %>
+      <div class="nextMove hideMe"><%= move.piece %> from <%= move.starting_coordinate %> to <%= move.ending_coordinate %></div>
+    <% end %>
 
   </div>
   <div class="span8">
 
-    <%= render 'board' %>
-
-    <div class="form-actions">
+    <div class="form-inline well">
       <button id="move" class='btn btn-primary'>Next Move</button>
       <button id="showCoordinates" class='btn btn-warning'>Coordinates</button>
       <%= link_to t('.back', :default => t("helpers.links.back")),
-                  exercises_path, :class => 'btn'  %>
+                  exercises_path, :class => 'btn pull-right'  %>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                  edit_exercise_path(@exercise), :class => 'btn' %>
+                  edit_exercise_path(@exercise), :class => 'btn pull-right' %>
     </div>
+
+    <%= render 'board' %>
+
+
   </div>
 </div>
