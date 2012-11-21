@@ -21,17 +21,21 @@
 
 
 $(document).ready(function() {
-	loadPiecesOnBoard($("#board").data('initial_setup').split(","))
+	loadPiecesOnBoard($("#board").data('initial_setup'))
+
 });
 
-function loadPiecesOnBoard(initial_setup){
+function loadPiecesOnBoard(start){
 
-	var ilen = initial_setup.length
-	for (var i=0; i<ilen; ++i) {
-		var square_info = initial_setup[i].split("-");
-		$('#'+square_info[0]).append("<div class='piece "+square_info[1]+"'>"+square_info[2]+"</div>");
-	}
- 
+	if (start != null){
+		var initial_setup = start.split(",");
+
+		var ilen = initial_setup.length
+		for (var i=0; i<ilen; ++i) {
+			var square_info = initial_setup[i].split("-");
+			$('#'+square_info[0]).append("<div class='piece "+square_info[1]+"'>"+square_info[2]+"</div>");
+		}
+	} 
 }
 
 function sizeBoard(percent_of_original){

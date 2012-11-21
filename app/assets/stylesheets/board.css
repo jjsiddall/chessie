@@ -53,6 +53,7 @@
 }
 
 .black {
+  color: black;
   /*text-shadow: 1px 1px 2px;*/
 }
 
@@ -62,6 +63,7 @@
 
 .dark {
   background: #555555; /* #1D7373; */
+  color: white;
 
 }
 
