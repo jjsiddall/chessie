@@ -21,21 +21,20 @@
 
 
 $(document).ready(function() {
-	loadPiecesOnBoard($("#board").data('initial_setup'))
-
+	var start = $("#board").data('initial_setup');
+	if ((start != undefined)&&(start != "")){
+		loadPiecesOnBoard(start.split(","));
+	}
 });
 
-function loadPiecesOnBoard(start){
+//This function takes an array of pieces and loads them on the board
+function loadPiecesOnBoard(initial_setup){
 
-	if (start != null){
-		var initial_setup = start.split(",");
-
-		var ilen = initial_setup.length
-		for (var i=0; i<ilen; ++i) {
-			var square_info = initial_setup[i].split("-");
-			$('#'+square_info[0]).append("<div class='piece "+square_info[1]+"'>"+square_info[2]+"</div>");
-		}
-	} 
+	var ilen = initial_setup.length
+	for (var i=0; i<ilen; ++i) {
+		var square_info = initial_setup[i].split("-");
+		$('#'+square_info[0]).append("<div class='piece "+square_info[1]+"'>"+square_info[2]+"</div>");
+	}
 }
 
 function sizeBoard(percent_of_original){
