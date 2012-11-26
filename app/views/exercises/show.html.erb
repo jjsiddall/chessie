@@ -1,46 +1,46 @@
 <div class="row">
-  <div class="span10">
+  <div class="span4">
       <%- model_class = Exercise -%>
       <div class="page-header">
         <h1><%=t '.title', :default => @exercise.title %></h1>
       </div>
+      <dl class="dl-horizontal">
+        <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+        <dd><%= @exercise.description %></dd>
+      </dl>
+    <% @exercise.moves.each do |move| %>
+      <div class="nextMove hideMe alert alert-success" data-explaination= "<%= move.explaination %>"  data-moveNumber= "<%= move.move_number %>"><%= move.piece %> from <%= move.starting_coordinate %> to <%= move.ending_coordinate %></div>
+    <% end %>
   </div>
-  <div class="span2">
-    <div class="form-inline">
+  <div class="span8">
+<!--     <div class="form-inline">
       <%= link_to t('.back', :default => t("helpers.links.back")),
                   exercises_path, :class => 'btn pull-right'  %>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
                   edit_exercise_path(@exercise), :class => 'btn pull-right' %>
+    </div> -->
+     <div class="form-inline">
+      <button id="move" class='btn btn-primary'>Next Move</button>
+      <button id="showCoordinates" class='btn btn-warning'>Coordinates</button>
     </div>
 
+    <%= render 'board' %>   
   </div>
 </div>
 <div class="row">
   <div class="span12">  
-    <dl class="dl-horizontal">
-<!--       <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-      <dd><%= @exercise.title %></dd> -->
-      <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-      <dd><%= @exercise.description %></dd>
-    </dl>
+
   </div>
 </div>
 
 <div class="row">
   <div class="span4">
-    <% @exercise.moves.each do |move| %>
-      <div class="nextMove hideMe"><%= move.piece %> from <%= move.starting_coordinate %> to <%= move.ending_coordinate %></div>
-    <% end %>
+
 
   </div>
   <div class="span8">
 
-    <div class="form-inline well">
-      <button id="move" class='btn btn-primary'>Next Move</button>
-      <button id="showCoordinates" class='btn btn-warning pull-right'>Coordinates</button>
-    </div>
 
-    <%= render 'board' %>
 
 
   </div>

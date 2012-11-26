@@ -1,17 +1,17 @@
 $(document).ready(function() {
 	
+
+
 	// var moves = $("#board").data('moves').split(",")
 
 	$('#move').on('click', function() {
 
-		// if (moves.length !=0) {
-		// 	one_move(moves[0]);
-		// 	moves.shift();
-		// }
+		var currentMove = $('.nextMove:first');
 
-		$('.nextMove:first').removeClass("hideMe");
-		var shown_move = $('.nextMove:first').html().split(" ");
-		$('.nextMove:first').removeClass("nextMove");
+		currentMove.removeClass("hideMe");
+		var shown_move = currentMove.html().split(" ");
+		currentMove.removeClass("nextMove");
+		currentMove.addClass("currentMove");
 
 		var current_move = [shown_move[2]];
 		current_move.push(shown_move[4]);
@@ -33,6 +33,9 @@ function one_move(current_move, piece){
 
 console.log(current_move);
 
+	//remove any popovers that are currently on the board
+	clear_popovers();
+
 	var rank_change = find_change_in_rank(current_move);
 	var file_change = find_change_in_file(current_move);
 	
@@ -49,7 +52,6 @@ console.log(current_move);
 		move_rank(current_move[0] , rank_change);
 		move_file(current_move[0] , current_move[1], file_change );
 	}
-
 
 	//debugging
 	highlightSquare(current_move[0]);
@@ -141,9 +143,9 @@ function move_diagonal(old_square, new_square, rank_change, file_change){
 //and append a piece from one square to another
 function append_to_square(old_square, new_square){
 	var pieceBeingMoved = $("#"+old_square).children();
+
 	new_square = $("#"+new_square);
 
-console.log(new_square.children())
 	if (new_square.children().length > 0){
 		new_square.effect("highlight", {"color" : "red"}, 500)
 		new_square.children().remove();
@@ -152,6 +154,28 @@ console.log(new_square.children())
 	new_square.append(pieceBeingMoved)
 	pieceBeingMoved.css("top", "")
 	pieceBeingMoved.css("left", "")
+
+	show_popover_info(pieceBeingMoved);
+
 }  
+function show_popover_info(pieceMoved){
+
+	var moveExplained = $(".currentMove:last").data('explaination');
+	var moveNumber =  $(".currentMove:last").data('movenumber');
+
+	pieceMoved.popover(
+	    {
+	        title: "Move " + moveNumber,
+	        content: moveExplained,
+	        trigger: "manual"
+	    }
+	).popover('show');	
+}
+function clear_popovers(){
+	$(".piece").each(function(e) {
+		var this_piece = $(this);
+		this_piece.popover('destroy');
+	});
+}
 
 function highlightSquare(boardSquare){ $('#'+boardSquare).effect("highlight", {"color" : "yellow"}, 500) }
