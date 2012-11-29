@@ -1,51 +1,90 @@
-<%- model_class = Exercise -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+<div class="row">
+  <div class="span12">
+  <%- model_class = Exercise -%>
+  <div class="page-header">
+    <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+  </div>
+  <!-- 'new Exercise' button -->
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_exercise_path,
+              :class => 'btn btn-primary' %>
+  </div>
 </div>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_exercise_path,
-            :class => 'btn btn-primary' %>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <!-- <th style="width: 15%"><%= model_class.human_attribute_name(:moves) %></th> -->
-      <!-- <th><%= model_class.human_attribute_name(:start) %></th> -->
-      <th><%= model_class.human_attribute_name(:updated_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @exercises.each do |exercise| %>
-      <tr>
-        <td><%= exercise.id %></td>
-        <td><%= link_to exercise.title , exercise_path(exercise) %></td>
-        <td><%= exercise.description %></td>
-        <!-- <td>
-          <ul>
-            <% exercise.moves.each do |actor| %>
-            <li><%= actor.move_number %>: <%= actor.piece %> from <%= actor.starting_coordinate %> to <%= actor.ending_coordinate %></li>
-            <% end %>
-          </ul>
-        </td> -->
-        <!-- <td><%= exercise.start %></td> -->
-        <td><%=time_ago_in_words(l exercise.updated_at) %> ago</td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_exercise_path(exercise), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      exercise_path(exercise),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+  <div class="span12">
+    
+    <div class="accordion" id="accordion2">
+      <% @exercises.each do |exercise| %> 
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <div class="row">
+            <div class="span12 form-inline">
+          
+              <a class="accordion-toggle pull-left" data-toggle="collapse" data-parent="#accordion2" href="#exer<%= exercise.id %>">
+                <%= exercise.title %>
+              </a>
+              <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                          exercise_path(exercise),
+                          :method => :delete,
+                          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                          :class => 'btn btn-mini btn-danger pull-right' %>
+              <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                          edit_exercise_path(exercise), :class => 'btn btn-mini pull-right' %>
+              <%= link_to t('.show', :default => t("helpers.links.show")),
+                          exercise_path(exercise), :class => 'btn btn-primary btn-mini pull-right' %>
+            </div>
+          </div>
+        </div>
+        <div id="exer<%= exercise.id %>" class="accordion-body collapse">
+          <div class="accordion-inner">
+            <%= exercise.description %>
+<!-- Show off the MOVES for the exercises inside  -->
+            <table class="table table-striped">
+              <thead>
+                <tr> 
+                  <th><%= Move.human_attribute_name(:move_number) %></th>
+                  <th><%= Move.human_attribute_name(:piece) %></th>
+                  <th><%= Move.human_attribute_name(:starting_coordinate) %></th>
+                  <th><%= Move.human_attribute_name(:ending_coordinate) %></th>
+                  <th><%= Move.human_attribute_name(:explaination) %></th>
+                  <th><% Move.human_attribute_name(:updated_at) %>Updated</th>
+                  <th><%=t '.actions', :default => t("helpers.actions") %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% exercise.moves.each do |move| %>
+                  <tr>
+                    <td><%= link_to move.move_number, move_path(move) %></td>
+                    <td><%= move.piece %></td>
+                    <td><%= move.starting_coordinate %></td>
+                    <td><%= move.ending_coordinate %></td>
+                    <td><%= move.explaination %></td>
+                    <td><%= time_ago_in_words(l move.updated_at) %> ago</td>
+                    <td>
+                      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                                  edit_move_path(move), :class => 'btn btn-mini' %>
+                      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                                  move_path(move),
+                                  :method => :delete,
+                                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                                  :class => 'btn btn-mini btn-danger' %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_exercise_path,
-            :class => 'btn btn-primary' %>
+            <%= link_to t('.new', :default => t("helpers.links.new")),
+                        new_move_path,
+                        :class => 'btn btn-primary' %>
+
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_exercise_path,
+                :class => 'btn btn-primary' %>
+  </div>
+</div>
