@@ -5,6 +5,6 @@ Chessie::Application.routes.draw do
 
   resources :exercises
 
-  root :to => 'exercises#index'
+  root :to => 'lessons#index'
   
 end
