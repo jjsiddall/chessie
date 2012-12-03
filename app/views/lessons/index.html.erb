@@ -50,7 +50,7 @@
             <div id="lesson-<%= lesson.id %>" class="accordion-body collapse">
               <div class="accordion-inner">
                 <%= lesson.description %>
-                <%= render('exercises/exerciseList', :show_exercises => lesson.exercises) %>
+                <%= render('exercises/exerciseAccordian', :show_exercises => lesson.exercises) %>
               </div>
             </div>
           </div>
