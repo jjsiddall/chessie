@@ -94,7 +94,7 @@ function saveCurrentBoard(){
 //Gets all piece locations based on board position, puts them into the format: "location-color-piece"
 function getCurrentLayout(){
 	var initial_setup = "";
-	$(".square").each(function(e) {
+	$(".square:not(.unused)").each(function(e) {
 		var this_square = $(this);
 		if (this_square.children().length > 0 && this_square.attr('id') != undefined){
 			//console.log(this_square.children()[0])

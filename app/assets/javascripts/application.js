@@ -40,20 +40,20 @@ function loadPiecesOnBoard(initial_setup){
 	}
 }
 
-function sizeBoard(percent_of_original){
-	var css_attr_to_shrink = ["#board", ".square", ".unused-square", ".corner", ".side", ".top"]
-	var ilen = css_attr_to_shrink.length
-	for (var i=0; i<ilen; ++i) {
-		$(css_attr_to_shrink[i]).css("height", parseInt($(css_attr_to_shrink[i]).css("height"))*percent_of_original)
-			.css("width", parseInt($(css_attr_to_shrink[i]).css("width"))*percent_of_original)
-	}
-}
-function sizeFont(percent_of_original){
-	var css_attr_to_shrink = [".piece", ".side", ".top"]
-	var ilen = css_attr_to_shrink.length
-	for (var i=0; i<ilen; ++i) {
-		$(css_attr_to_shrink[i]).css("font-size", parseInt($(css_attr_to_shrink[i]).css("font-size"))*percent_of_original)
-			.css("padding-left", parseInt($(css_attr_to_shrink[i]).css("padding-left"))*percent_of_original)
-	}
+// function sizeBoard(percent_of_original){
+// 	var css_attr_to_shrink = ["#board", ".square", ".unused-square", ".corner", ".side", ".top"]
+// 	var ilen = css_attr_to_shrink.length
+// 	for (var i=0; i<ilen; ++i) {
+// 		$(css_attr_to_shrink[i]).css("height", parseInt($(css_attr_to_shrink[i]).css("height"))*percent_of_original)
+// 			.css("width", parseInt($(css_attr_to_shrink[i]).css("width"))*percent_of_original)
+// 	}
+// }
+// function sizeFont(percent_of_original){
+// 	var css_attr_to_shrink = [".piece", ".side", ".top"]
+// 	var ilen = css_attr_to_shrink.length
+// 	for (var i=0; i<ilen; ++i) {
+// 		$(css_attr_to_shrink[i]).css("font-size", parseInt($(css_attr_to_shrink[i]).css("font-size"))*percent_of_original)
+// 			.css("padding-left", parseInt($(css_attr_to_shrink[i]).css("padding-left"))*percent_of_original)
+// 	}
 
-}
+// }
