@@ -1,14 +1,26 @@
 <div class="row">
   <div class="span4">
       <%- model_class = Exercise -%>
-      <div class="page-header">
-        <h1><%=t '.title', :default => @exercise.title %></h1>
+      <div class="page-header" data-screen="show">
+        <h1><%=t '.title', :default => @exercise.title %>   <a data-toggle="modal" href="#descriptionModal" class="btn btn-mini btn-primary">...</a></h1>
            <button id="move" class='btn btn-primary'>Next Move</button>
       </div>
-      <dl class="dl-horizontal">
+      <div id="descriptionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="descriptionModalLabel"><%= @exercise.title %></h3>
+        </div>
+        <div class="modal-body">
+          <%= @exercise.description %>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+<!--       <dl class="dl-horizontal">
         <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
         <dd><%= @exercise.description %></dd>
-      </dl>
+      </dl> -->
     <% @exercise.moves.each do |move| %>
       <div class="nextMove hideMe alert alert-success" data-explaination= "<%= move.explaination %>"  data-moveNumber= "<%= move.move_number %>"><%= move.piece %> from <%= move.starting_coordinate %> to <%= move.ending_coordinate %></div>
     <% end %>
@@ -22,23 +34,5 @@
       <button id="showCoordinates" class='btn btn-warning'>Coordinates</button> -->
 
     <%= render 'board' %>   
-  </div>
-</div>
-<div class="row">
-  <div class="span12">  
-
-  </div>
-</div>
-
-<div class="row">
-  <div class="span4">
-
-
-  </div>
-  <div class="span8">
-
-
-
-
   </div>
 </div>

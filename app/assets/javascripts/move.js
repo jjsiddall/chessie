@@ -1,11 +1,11 @@
 $(document).ready(function() {
 	
-
-
-	// var moves = $("#board").data('moves').split(",")
+	if ($(".page-header").data('screen') === "show"){
+		$('#descriptionModal').modal('show');
+	}
 
 	$('#move').on('click', function() {
-
+		// $('.dl-horizontal').slideUp();
 		var currentMove = $('.nextMove:first');
 
 		currentMove.removeClass("hideMe");
@@ -18,18 +18,13 @@ $(document).ready(function() {
 
 		one_move(current_move, shown_move[0]);
 	});
-
-	$('#showCoordinates').on('click', function() { $('.coordinate').toggleClass("hideMe");});
+	
+	//Toggles the coordinates (outside of the board) on and off
+	$('.square').on('click', function() { $('.coordinate').toggleClass("hideMe");});
 
 });
 
 function one_move(current_move, piece){
-	// //Look at current from and to move, then find the change in squares
-	// var current_move = move.split("-");
-
-	// //remove anything but the last two letters from the moves
-	// current_move[0] = current_move[0].substr(-2);
-	// current_move[1] = current_move[1].substr(-2);
 
 console.log(current_move);
 
