@@ -1,22 +1,62 @@
+var showPopover = true;
+
 $(document).ready(function() {
 	
+
 	if ($(".page-header").data('screen') === "show"){
 		$('#descriptionModal').modal('show');
 	}
 
-	$('#move').on('click', function() {
-		// $('.dl-horizontal').slideUp();
+	$('#nextMove').on('click', function() {
+		//show the popover for the move the user is on
+		showPopover = true;
+
+		//looks at all the nextMoves, gets the first one
 		var currentMove = $('.nextMove:first');
 
-		currentMove.removeClass("hideMe");
-		var shown_move = currentMove.html().split(" ");
-		currentMove.removeClass("nextMove");
-		currentMove.addClass("currentMove");
+		if (currentMove.html() != undefined){
 
-		var current_move = [shown_move[2]];
-		current_move.push(shown_move[4]);
+			//unhides the top nextMove and takes the "nextMove" off
+			var shown_move = currentMove.html().split(" ");
 
-		one_move(current_move, shown_move[0]);
+			var current_move = [shown_move[2]];
+			current_move.push(shown_move[4]);
+
+			//sends in the current move
+			one_move(current_move, shown_move[0]);
+
+			currentMove.removeClass("hideMe");
+			currentMove.removeClass("nextMove");
+			currentMove.addClass("currentMove");
+
+		}
+		else{
+			//remove popovers (otherwise they will show on the darkened screen)
+			clear_popovers();
+			//show the conclusion popover when there are no more moves
+			$('#conclusionModal').modal('show');
+		}
+	});
+
+	$('#prevMove').on('click', function() {
+		//do not show the popover for the move the user is on
+		showPopover = false;
+
+		var currentMove = $('.currentMove:last');
+		if (currentMove.html() != undefined){
+
+			var shown_move = currentMove.html().split(" ");
+			
+			var current_move = [shown_move[4]];
+			current_move.push(shown_move[2]);
+
+			one_move(current_move, shown_move[0]);
+
+			currentMove.addClass("hideMe");
+			currentMove.addClass("nextMove");
+			currentMove.removeClass("currentMove");
+		}
+
 	});
 	
 	//Toggles the coordinates (outside of the board) on and off
@@ -26,24 +66,17 @@ $(document).ready(function() {
 
 function one_move(current_move, piece){
 
-console.log(current_move);
-
 	//remove any popovers that are currently on the board
 	clear_popovers();
 
 	var rank_change = find_change_in_rank(current_move);
 	var file_change = find_change_in_file(current_move);
-	
-	console.log("Rank: "+rank_change)	
-	console.log("File: "+file_change)	
-	
+		
 	//need to determine if its a knight move or a bishop/queen/king
-	if ((rank_change != 0) && (file_change != 0) && (piece != "♞"))
-	{
+	if ((rank_change != 0) && (file_change != 0) && (piece != "♞")){
 		move_diagonal(current_move[0], current_move[1], rank_change, file_change)
 	}
-	else
-	{
+	else{
 		move_rank(current_move[0] , rank_change);
 		move_file(current_move[0] , current_move[1], file_change );
 	}
@@ -149,19 +182,28 @@ function append_to_square(old_square, new_square){
 	new_square.append(pieceBeingMoved)
 	pieceBeingMoved.css("top", "")
 	pieceBeingMoved.css("left", "")
-
-	show_popover_info(pieceBeingMoved);
-
+	
+	if (showPopover === true){
+		show_popover_info(pieceBeingMoved, new_square.attr('id'));
+	}
 }  
-function show_popover_info(pieceMoved){
+function show_popover_info(pieceMoved, newSquareID){
+	var file = newSquareID.charAt(0);
 
 	var moveExplained = $(".currentMove:last").data('explaination');
 	var moveNumber =  $(".currentMove:last").data('movenumber');
+	var popoverSide = "right"
+	var popoverTitle = pieceMoved.html() + " to " + newSquareID;
 
+	if (file === "a" || file === "b" || file === "c" || file === "d" ){
+		popoverSide = "left";
+	}
+		
 	pieceMoved.popover(
 	    {
-	        title: "Move " + moveNumber,
+	        title: popoverTitle,
 	        content: moveExplained,
+	        placement: popoverSide,
 	        trigger: "manual"
 	    }
 	).popover('show');	

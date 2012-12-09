@@ -3,19 +3,8 @@
       <%- model_class = Exercise -%>
       <div class="page-header" data-screen="show">
         <h1><%=t '.title', :default => @exercise.title %>   <a data-toggle="modal" href="#descriptionModal" class="btn btn-mini btn-primary">...</a></h1>
-           <button id="move" class='btn btn-primary'>Next Move</button>
-      </div>
-      <div id="descriptionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 id="descriptionModalLabel"><%= @exercise.title %></h3>
-        </div>
-        <div class="modal-body">
-          <%= @exercise.description %>
-        </div>
-        <div class="modal-footer">
-          <button class="btn" data-dismiss="modal">Close</button>
-        </div>
+          <button id="nextMove" class='btn btn-primary'>Next</button>
+          <button id="prevMove" class='btn btn-primary'>Previous</button>
       </div>
 <!--       <dl class="dl-horizontal">
         <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
@@ -36,3 +25,30 @@
     <%= render 'board' %>   
   </div>
 </div>
+<div id="descriptionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="descriptionModalLabel"><%= @exercise.title %></h3>
+  </div>
+  <div class="modal-body">
+    <%= @exercise.description %>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal">Close</button>
+  </div>
+</div>
+<div id="conclusionModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="descriptionModalLabel">Exercise Complete!</h3>
+  </div>
+  <div class="modal-body">
+    <%= @exercise.description %>
+  </div>
+  <div class="modal-footer">
+    <%= link_to "Start Over", exercise_path(@exercise.id), :class => 'btn' %>
+    <button class="btn" data-dismiss="modal">Stay Here</button>
+    <%= link_to "Next Exercise", exercise_path(@exercise.id+1), :class => 'btn btn-primary btn-large' %>
+  </div>
+</div>
+

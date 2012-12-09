@@ -72,7 +72,7 @@ function resetBoard(){
 
 //removes all pieces from the board
 function clearBoard(){
-	$(".square").each(function(e) {
+	$(".square:not(.unused)").each(function(e) {
 		$(this).children().remove();
 	});
 	saveCurrentBoard();
