@@ -1,4 +1,6 @@
 Chessie::Application.routes.draw do
+  resources :practices
+
   resources :lessons
 
   resources :moves

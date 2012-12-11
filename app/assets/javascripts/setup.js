@@ -80,17 +80,26 @@ function clearBoard(){
 
 //Saves the pieces - as they are on the board - to the db
 function saveCurrentBoard(){
-	//get which exercise I am working with (the id of it) so I can use it later on teh ajax call
-	exercise_id = $("#board").data('id')
 	//get what the board currently looks like and PUT it in the DB
 	var initial_setup = getCurrentLayout();
+	//figure out what board I am saving (exercise or practice)
+	var save_to_table = $(location).attr('href').split('/')[3];
+	//build field name for table I am saving to
+	var start_field = save_to_table.slice(0, -1) + '[start]';
+	//get which exercise I am working with (the id of it) so I can use it later on teh ajax call
+	var id = $("#board").data('id')
+	//build the URL I am sending data to
+	var url_field = '/' + save_to_table + '/' + id;
+
+	//create the json as a string for the field and data that will be passed in the ajax call
+	var dataObj = "{\"" + start_field + "\":\"" + initial_setup +"\" }" ;
+	//convert the json string into json
+	dataObj = jQuery.parseJSON(dataObj);
+
     $.ajax({
-    	url: '/exercises/' + exercise_id,
+    	url: url_field,
     	type: 'PUT',
-    	data: {
-        	'exercise[id]': exercise_id,
-        	'exercise[start]': initial_setup
-		},
+    	data: dataObj,
 		dataType: 'json'
 	});
 }

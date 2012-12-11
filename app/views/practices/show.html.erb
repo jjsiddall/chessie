@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="span4">
+      <%- model_class = Practice -%>
+      <div class="page-header" data-screen="show">
+        <h1><%=t '.title', :default => @practice.title %></h1>
+      </div>
+    <% @practice.moves.each do |move| %>
+      <div class="alert"  data-moveNumber= "<%= move.move_number %>"><%= move.piece %> from <%= move.starting_coordinate %> to <%= move.ending_coordinate %></div>
+    <% end %>
+  </div>
+  <div class="span8">
+
+    <%= render('exercises/board', :@exercise => @practice )%>   
+  </div>
+</div>
