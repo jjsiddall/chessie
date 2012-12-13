@@ -1,7 +1,7 @@
 <div class="row">
   <div class="span4">
       <%- model_class = Exercise -%>
-      <div class="page-header" data-screen="show">
+      <div class="page-header" data-modal="yes">
         <h1><%=t '.title', :default => @exercise.title %>   <a data-toggle="modal" href="#descriptionModal" class="btn btn-mini btn-primary">...</a></h1>
           <button id="nextMove" class='btn btn-primary'>Next</button>
           <button id="prevMove" class='btn btn-primary'>Previous</button>
@@ -11,7 +11,7 @@
         <dd><%= @exercise.description %></dd>
       </dl> -->
     <% @exercise.moves.each do |move| %>
-      <div class="nextMove hideMe alert alert-success" data-explaination= "<%= move.explaination %>"  data-moveNumber= "<%= move.move_number %>"><%= move.piece %> from <%= move.starting_coordinate %> to <%= move.ending_coordinate %></div>
+      <div class="nextMove hideMe alert alert-info" data-explaination= "<%= move.explaination %>"  data-moveNumber= "<%= move.move_number %>"><%= move.piece %> from <%= move.starting_coordinate %> to <%= move.ending_coordinate %></div>
     <% end %>
   </div>
   <div class="span8">

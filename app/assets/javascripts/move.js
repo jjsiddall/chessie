@@ -1,11 +1,6 @@
 var showPopover = true;
 
 $(document).ready(function() {
-	
-
-	if ($(".page-header").data('screen') === "show"){
-		$('#descriptionModal').modal('show');
-	}
 
 	$('#nextMove').on('click', function() {
 		//show the popover for the move the user is on
@@ -16,15 +11,14 @@ $(document).ready(function() {
 
 		if (currentMove.html() != undefined){
 
-			//unhides the top nextMove and takes the "nextMove" off
 			var shown_move = currentMove.html().split(" ");
-
 			var current_move = [shown_move[2]];
 			current_move.push(shown_move[4]);
 
 			//sends in the current move
 			one_move(current_move, shown_move[0]);
 
+			//unhides the top nextMove and takes the "nextMove" off
 			currentMove.removeClass("hideMe");
 			currentMove.removeClass("nextMove");
 			currentMove.addClass("currentMove");
@@ -195,6 +189,7 @@ function show_popover_info(pieceMoved, newSquareID){
 	var popoverSide = "right"
 	var popoverTitle = pieceMoved.html() + " to " + newSquareID;
 
+	//make the popover appear to the side (makes readability easier)
 	if (file === "a" || file === "b" || file === "c" || file === "d" ){
 		popoverSide = "left";
 	}

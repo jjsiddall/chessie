@@ -22,7 +22,9 @@
 
 
 $(document).ready(function() {
-
+	if ($(".page-header").data('modal') === "yes"){
+		$('#descriptionModal').modal('show');
+	}
 
 	var start = $("#board").data('initial_setup');
 	if ((start != undefined)&&(start != "")){

@@ -10,6 +10,19 @@
     <div class="controls">
       <%= f.collection_select :practice_id, Practice.all, :id, :title %>
     </div>
+  </div>
+    <div class="control-group">
+    <%= f.label :move_number, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :move_number %>
+    </div>
+  </div>
+    <div class="control-group">
+    <%= f.label :computer, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.radio_button :computer, true %>
+      <%= f.radio_button :computer, false %>
+    </div>
   </div>    
   <div class="control-group">
     <%= f.label :piece, :class => 'control-label' %>
@@ -21,12 +34,6 @@
     <%= f.label :starting_coordinate, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :starting_coordinate, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :move_number, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :move_number %>
     </div>
   </div>
   <div class="control-group">
