@@ -45,10 +45,33 @@
   <div class="modal-body">
     <%= @exercise.description %>
   </div>
+
   <div class="modal-footer">
     <%= link_to "Start Over", exercise_path(@exercise.id), :class => 'btn' %>
     <button class="btn" data-dismiss="modal">Stay Here</button>
-    <%= link_to "Next Exercise", exercise_path(@exercise.id+1), :class => 'btn btn-primary btn-large' %>
+    <!-- Now I need to figure out what the next "thing to go to is" -->
+    <!-- get the cookie that is holding the lesson plan, split is by ",", and get the second in the array -->
+    <% if cookies[:plan] != "" %>
+      <% viewType = cookies[:plan].split(",")[1].split(":")[0] %>
+      <% viewId = cookies[:plan].split(",")[1].split(":")[1] %>
+    <% else %>
+      <% viewType = "" %>
+    <% end %>
+    <!-- find out what is next by splitting nextView -->
+    <% if viewType == "Exercise" %>
+      <%= link_to "Next Exercise", exercise_path(viewId), :class => 'btn btn-primary btn-large' %>
+    <% elsif viewType == "Practice" %>
+      <%= link_to "Practice It!", practice_path(viewId), :class => 'btn btn-primary btn-large' %>    
+    <% else viewType == "" %>
+      <%= link_to "Lesson Complete!", lesson_path(1), :class => 'btn btn-primary btn-large' %>    
+    <% end -%>
   </div>
 </div>
+
+<!-- now i need to break up the cookie, take out the view I am on, rebuild it, and pass it back in as a cookie -->
+<% newPlan = cookies[:plan].split(",") %>
+<% newPlan.shift %>
+<%= cookies[:plan] = newPlan.join(",") %>
+<% puts cookies[:plan] %>
+
 

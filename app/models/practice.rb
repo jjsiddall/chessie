@@ -3,4 +3,5 @@ class Practice < ActiveRecord::Base
 
   has_many :moves
   belongs_to :lesson
+  has_many :plan
 end

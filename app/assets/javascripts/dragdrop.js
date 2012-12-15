@@ -90,13 +90,15 @@ function verifyCorrectMove(pieceBeingMoved, droppedOnSquare){
 			//sends in the current move
 			one_move(current_move, shown_move[0]);
 			nextMoveInList.remove();
-		}
+		}	
+
+		//look and see if all the moves are done
+		if ($('.nextMove:First').length === 0){
+	  		$('#conclusionModal').modal('show');  		
+	  	}
 	}
 	else{
 		console.log("wrong");
-
-
+// TODO: something that pops up the wrong move and asks if you want a hint
 	}
-
-
 }

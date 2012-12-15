@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  lesson_id: 1
+  unit_type: MyString
+  unit_id: 1
+
+two:
+  lesson_id: 1
+  unit_type: MyString
+  unit_id: 1

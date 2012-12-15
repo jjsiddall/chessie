@@ -15,6 +15,18 @@ class LessonsController < ApplicationController
   def show
     @lesson = Lesson.find(params[:id])
 
+    #saving the lesson plan as a cookie and then going to pop off exercises, practices, and tests as i go
+    thinPlan = ""
+    @lesson.plans.each do |plan|
+      if plan.unit_type == "Exercise"
+        thinPlan = thinPlan + plan.unit_type + ":" + plan.exercise_id.to_s + ","
+      elsif plan.unit_type == "Practice"
+        thinPlan = thinPlan + plan.unit_type + ":" + plan.practice_id.to_s + ","
+      end
+
+    end
+    cookies[:plan] = thinPlan
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @lesson }
