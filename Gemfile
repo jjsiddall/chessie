@@ -10,6 +10,7 @@ group :development, :test do
 end 
 group :production do
 	gem 'pg'
+	#gem 'thin'
 end
 
 
@@ -32,6 +33,8 @@ end
 gem 'jquery-rails'
 
 gem 'seed_dump'
+
+#gem 'thin'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

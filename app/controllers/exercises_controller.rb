@@ -21,6 +21,17 @@ class ExercisesController < ApplicationController
     end
   end
 
+  # GET /exercises/1
+  # GET /exercises/1.json
+  def practice
+    @exercise = Exercise.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @exercise }
+    end
+  end
+
   # GET /exercises/new
   # GET /exercises/new.json
   def new

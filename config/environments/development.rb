@@ -32,6 +32,7 @@ Chessie::Application.configure do
   # Do not compress assets
   config.assets.compress = false
 
+##changed this so that the terminal has fewer lines shown
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false
 end

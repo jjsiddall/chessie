@@ -1,14 +1,16 @@
 Chessie::Application.routes.draw do
-  resources :plans
-
-  resources :practices
-
   resources :lessons
 
   resources :moves
 
-  resources :exercises
+  resources :exercises do
+	member do
+    	get 'practice'
+  	end
+  end
 
   root :to => 'lessons#index'
+
+  # match 'exercises/:id/practice' => 'exercises#practice'
   
 end
