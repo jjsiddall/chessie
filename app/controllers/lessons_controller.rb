@@ -14,6 +14,12 @@ class LessonsController < ApplicationController
   # GET /lessons/1.json
   def show
     @lesson = Lesson.find(params[:id])
+    
+    # Sets a cookie for which lesson the user is on
+    cookies[:lesson_number] = params[:id]
+
+    # Starts a cookie for increment of the exercises
+    cookies[:exercise_increment] = 1
 
     respond_to do |format|
       format.html # show.html.erb

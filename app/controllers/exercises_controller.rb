@@ -25,7 +25,14 @@ class ExercisesController < ApplicationController
   # GET /exercises/1.json
   def practice
     @exercise = Exercise.find(params[:id])
+    @lesson = Lesson.find(cookies[:lesson_number].to_i)
+    
+    #increment the exercise number by one as the exercise is shown
+    cookies[:exercise_increment] = cookies[:exercise_increment].to_i + 1
 
+    puts "*********"
+    puts cookies[:exercise_increment]
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @exercise }

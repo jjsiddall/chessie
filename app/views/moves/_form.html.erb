@@ -6,18 +6,12 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :practice_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.collection_select :practice_id, Practice.all, :id, :title %>
-    </div>
-  </div>
-    <div class="control-group">
     <%= f.label :move_number, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :move_number %>
     </div>
   </div>
-    <div class="control-group">
+  <div class="control-group">
     <%= f.label :computer, :class => 'control-label' %>
     <div class="controls">
       <%= f.radio_button :computer, true %> True
