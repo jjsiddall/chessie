@@ -78,6 +78,13 @@ function one_move(current_move, piece){
 	//debugging
 	highlightSquare(current_move[0]);
 	highlightSquare(current_move[1]);
+
+	if ((file_change > 1) && (piece === "♚")){
+		showPopover = false;
+		setTimeout(function() {
+			$('#nextMove').click();
+		}, 1100);    		
+	}
 }
 
 //Passing in start and end square, now to determine movement number of squares
