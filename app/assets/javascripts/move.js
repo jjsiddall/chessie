@@ -54,7 +54,7 @@ $(document).ready(function() {
 	});
 	
 	//Toggles the coordinates (outside of the board) on and off
-	$('.square').on('click', function() { $('.coordinate').toggleClass("hideMe");});
+	//$('.square').on('click', function() { $('.coordinate').toggleClass("hideMe");});
 
 });
 
@@ -76,8 +76,8 @@ function one_move(current_move, piece){
 	}
 
 	//debugging
-	highlightSquare(current_move[0]);
-	highlightSquare(current_move[1]);
+	highlightSquare(current_move[0], "yellow");
+	highlightSquare(current_move[1], "yellow");
 
 	if ((file_change > 1) && (piece === "♚")){
 		showPopover = false;
@@ -170,13 +170,14 @@ function move_diagonal(old_square, new_square, rank_change, file_change){
 
 //Used to remove the piece from the oringinal square 
 //and append a piece from one square to another
-function append_to_square(old_square, new_square){
+function append_to_square(old_square, new_square_id){
 	var pieceBeingMoved = $("#"+old_square).children();
 
-	new_square = $("#"+new_square);
+	var new_square = $("#"+new_square_id);
 
 	if (new_square.children().length > 0){
-		new_square.effect("highlight", {"color" : "red"}, 500)
+		console.log(new_square_id)
+		highlightSquare(new_square_id, "red");
 		new_square.children().remove();
 	}
 
@@ -217,4 +218,7 @@ function clear_popovers(){
 	});
 }
 
-function highlightSquare(boardSquare){ $('#'+boardSquare).effect("highlight", {"color" : "yellow"}, 500) }
+function highlightSquare(boardSquare, highlightColor){
+
+	 $('#'+boardSquare).effect("highlight", {"color" : highlightColor}, 500) 
+}
